@@ -6,9 +6,11 @@ import com.example.ubersystemservice.repository.NotificationRepo;
 import com.example.ubersystemservice.service.NotificationService;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
+import org.modelmapper.TypeToken;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
+import java.util.List;
 
 @Service
 @RequiredArgsConstructor
@@ -22,5 +24,11 @@ public class NotificationServiceImpl implements NotificationService {
         notification.setDescription(dto.getDescription());
         Notification savedNotification = notificationRepo.save(notification);
         return modelMapper.map(savedNotification, NotificationDto.class);
+    }
+
+    @Override
+    public List<NotificationDto> getAllNotification() {
+        List<Notification> notificationList = notificationRepo.findAll();
+        return modelMapper.map(notificationList,new TypeToken<List<NotificationDto>>(){}.getType());
     }
 }
