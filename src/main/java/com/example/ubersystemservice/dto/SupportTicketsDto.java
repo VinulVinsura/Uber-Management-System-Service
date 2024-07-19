@@ -12,7 +12,7 @@ import java.util.Date;
 @AllArgsConstructor
 public class SupportTicketsDto {
     private Integer ticketId;
-    private Date postDate;
+    private String postDate;
     private String description;
     private String userId;
     private String email;

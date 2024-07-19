@@ -6,10 +6,12 @@ import com.example.ubersystemservice.repository.SupportTicketRepo;
 import com.example.ubersystemservice.service.UserSupportService;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
+import org.modelmapper.TypeToken;
 import org.springframework.stereotype.Service;
 
 import java.lang.ref.PhantomReference;
 import java.util.Date;
+import java.util.List;
 
 @Service
 @RequiredArgsConstructor
@@ -29,5 +31,11 @@ public class UserSupportServiceImpl implements UserSupportService {
         supportTicket.setUserRole(ticketsDto.getUserRole());
         SupportTicket ticket = supportTicketRepo.save(supportTicket);
         return modelMapper.map(ticket, SupportTicketsDto.class);
+    }
+
+    @Override
+    public List<SupportTicketsDto> getSupportTickets(String userId) {
+        List<SupportTicket> ticketList = supportTicketRepo.findByUserId(userId);
+        return modelMapper.map(ticketList,new TypeToken<List<SupportTicketsDto>>(){}.getType());
     }
 }
