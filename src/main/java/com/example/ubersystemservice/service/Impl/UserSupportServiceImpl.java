@@ -35,7 +35,14 @@ public class UserSupportServiceImpl implements UserSupportService {
 
     @Override
     public List<SupportTicketsDto> getSupportTickets(String userId) {
-        List<SupportTicket> ticketList = supportTicketRepo.findByUserId(userId);
+        List<SupportTicket> ticketList = supportTicketRepo.findAllByUserId(userId);
         return modelMapper.map(ticketList,new TypeToken<List<SupportTicketsDto>>(){}.getType());
+    }
+
+    @Override
+    public SupportTicketsDto getSupportTicketsByTicketId(String userId, Integer ticketId) {
+        SupportTicket supportTicket = supportTicketRepo.findByUserIdAndTicketId(userId, ticketId);
+
+        return modelMapper.map(supportTicket, SupportTicketsDto.class);
     }
 }

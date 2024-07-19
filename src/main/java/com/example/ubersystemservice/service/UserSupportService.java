@@ -8,5 +8,6 @@ import java.util.List;
 public interface UserSupportService {
     SupportTicketsDto postSupportTicket(SupportTicketsDto ticketsDto);
     List<SupportTicketsDto> getSupportTickets(String userId);
+    SupportTicketsDto getSupportTicketsByTicketId(String userId ,Integer ticketId);
 
 }

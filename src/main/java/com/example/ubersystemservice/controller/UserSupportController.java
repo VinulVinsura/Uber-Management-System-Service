@@ -20,6 +20,7 @@ public class UserSupportController {
         return ResponseEntity.ok(ticketsDto);
     }
 
+    //List all support tickets for the passenger.
     @GetMapping("/get-support-ticket/{userId}")
     public ResponseEntity<List<SupportTicketsDto>> getSupportTicketById(@PathVariable String userId){
         List<SupportTicketsDto> ticketsDtoList = userSupportService.getSupportTickets(userId);
@@ -27,6 +28,19 @@ public class UserSupportController {
             return ResponseEntity.notFound().build();
         }
         return ResponseEntity.ok(ticketsDtoList);
+
+    }
+
+    // Get details of a specific support ticket.
+    @GetMapping("/get-support-ticket/{userId}/{ticketId}")
+    public ResponseEntity<SupportTicketsDto> getSupportTicketByTicketId(@PathVariable String userId,
+                                                        @PathVariable Integer ticketId){
+        try {
+            SupportTicketsDto tickets = userSupportService.getSupportTicketsByTicketId(userId, ticketId);
+            return ResponseEntity.ok(tickets);
+        }catch (RuntimeException ex){
+            return ResponseEntity.notFound().build();
+        }
 
     }
 }
