@@ -11,6 +11,7 @@ import java.util.Date;
 @NoArgsConstructor
 @AllArgsConstructor
 public class SupportTicketsDto {
+
     private Integer ticketId;
     private String postDate;
     private String description;
