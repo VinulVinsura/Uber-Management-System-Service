@@ -1,6 +1,7 @@
 package com.example.ubersystemservice.controller;
 
 import com.example.ubersystemservice.dto.SupportTicketsDto;
+import com.example.ubersystemservice.entity.UserRole;
 import com.example.ubersystemservice.service.UserSupportService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -21,9 +22,11 @@ public class UserSupportController {
     }
 
     //List all support tickets for the passenger.
-    @GetMapping("/get-support-ticket/{userId}")
-    public ResponseEntity<List<SupportTicketsDto>> getSupportTicketById(@PathVariable String userId){
-        List<SupportTicketsDto> ticketsDtoList = userSupportService.getSupportTickets(userId);
+    @GetMapping("/getAll-support-ticket/{userId}/{userRole}")
+    public ResponseEntity<List<SupportTicketsDto>> getSupportTicketById(@PathVariable String userId,
+                                                                        @PathVariable UserRole userRole ){
+        System.out.println(1);
+        List<SupportTicketsDto> ticketsDtoList = userSupportService.getSupportTickets(userId,userRole);
         if (ticketsDtoList.isEmpty()){
             return ResponseEntity.notFound().build();
         }
@@ -34,7 +37,7 @@ public class UserSupportController {
     // Get details of a specific support ticket.
     @GetMapping("/get-support-ticket/{userId}/{ticketId}")
     public ResponseEntity<SupportTicketsDto> getSupportTicketByTicketId(@PathVariable String userId,
-                                                        @PathVariable Integer ticketId){
+                                                                        @PathVariable Integer ticketId){
         try {
             SupportTicketsDto tickets = userSupportService.getSupportTicketsByTicketId(userId, ticketId);
             return ResponseEntity.ok(tickets);

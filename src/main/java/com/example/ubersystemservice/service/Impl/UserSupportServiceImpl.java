@@ -2,6 +2,7 @@ package com.example.ubersystemservice.service.Impl;
 
 import com.example.ubersystemservice.dto.SupportTicketsDto;
 import com.example.ubersystemservice.entity.SupportTicket;
+import com.example.ubersystemservice.entity.UserRole;
 import com.example.ubersystemservice.repository.SupportTicketRepo;
 import com.example.ubersystemservice.service.UserSupportService;
 import lombok.RequiredArgsConstructor;
@@ -34,8 +35,8 @@ public class UserSupportServiceImpl implements UserSupportService {
     }
 
     @Override
-    public List<SupportTicketsDto> getSupportTickets(String userId) {
-        List<SupportTicket> ticketList = supportTicketRepo.findAllByUserId(userId);
+    public List<SupportTicketsDto> getSupportTickets(String userId, UserRole userRole) {
+        List<SupportTicket> ticketList = supportTicketRepo.findAllByUserIdAndUserRole(userId,userRole);
         return modelMapper.map(ticketList,new TypeToken<List<SupportTicketsDto>>(){}.getType());
     }
 
