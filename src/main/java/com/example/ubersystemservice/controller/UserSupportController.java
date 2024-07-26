@@ -35,11 +35,12 @@ public class UserSupportController {
     }
 
     // Get details of a specific support ticket.
-    @GetMapping("/get-support-ticket/{userId}/{ticketId}")
+    @GetMapping("/get-support-ticket/{userId}/{ticketId}/{userRole}")
     public ResponseEntity<SupportTicketsDto> getSupportTicketByTicketId(@PathVariable String userId,
-                                                                        @PathVariable Integer ticketId){
+                                                                        @PathVariable Integer ticketId,
+                                                                        @PathVariable UserRole userRole){
         try {
-            SupportTicketsDto tickets = userSupportService.getSupportTicketsByTicketId(userId, ticketId);
+            SupportTicketsDto tickets = userSupportService.getSupportTicketsByTicketId(userId, ticketId,userRole);
             return ResponseEntity.ok(tickets);
         }catch (RuntimeException ex){
             return ResponseEntity.notFound().build();

@@ -9,6 +9,6 @@ import java.util.List;
 public interface UserSupportService {
     SupportTicketsDto postSupportTicket(SupportTicketsDto ticketsDto);
     List<SupportTicketsDto> getSupportTickets(String userId, UserRole userRole);
-    SupportTicketsDto getSupportTicketsByTicketId(String userId ,Integer ticketId);
+    SupportTicketsDto getSupportTicketsByTicketId(String userId ,Integer ticketId, UserRole userRole);
 
 }

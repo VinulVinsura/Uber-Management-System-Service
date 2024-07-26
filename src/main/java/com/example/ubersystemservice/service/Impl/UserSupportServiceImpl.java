@@ -41,8 +41,8 @@ public class UserSupportServiceImpl implements UserSupportService {
     }
 
     @Override
-    public SupportTicketsDto getSupportTicketsByTicketId(String userId, Integer ticketId) {
-        SupportTicket supportTicket = supportTicketRepo.findByUserIdAndTicketId(userId, ticketId);
+    public SupportTicketsDto getSupportTicketsByTicketId(String userId, Integer ticketId, UserRole userRole) {
+        SupportTicket supportTicket = supportTicketRepo.findByUserIdAndTicketIdAndUserRole(userId, ticketId,userRole);
 
         return modelMapper.map(supportTicket, SupportTicketsDto.class);
     }

@@ -8,5 +8,5 @@ import java.util.List;
 
 public interface SupportTicketRepo extends JpaRepository<SupportTicket, Integer> {
     List<SupportTicket> findAllByUserIdAndUserRole(String userId, UserRole userRole);
-    SupportTicket findByUserIdAndTicketId(String userId ,Integer ticketId);
+    SupportTicket findByUserIdAndTicketIdAndUserRole(String userId ,Integer ticketId,UserRole userRole);
 }
